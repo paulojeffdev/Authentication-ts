@@ -10,7 +10,7 @@ export const checkRole = (roles: Array<string>) => {
         const userRepository = AppDataSource.getRepository(User)
         let user: User
         try {
-            user = await userRepository.findOneOrFail(id)
+            user = await userRepository.findOneOrFail({where: id})
         } catch(error: any) {
             res.status(401).send(error.message)
         }
