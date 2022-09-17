@@ -29,6 +29,7 @@
       "dev": "nodemon src/index.ts",
       "typeorm": "typeorm-ts-node-commonjs -d ./src/data-source.ts",
       "test": "jest --coverage",
-      "build": "tsc"
+      "build": "tsc",
+      "start": "node dist/src/index.js"
    }
 }
