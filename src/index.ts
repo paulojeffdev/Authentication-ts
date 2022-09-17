@@ -5,6 +5,9 @@ import helmet from "helmet"
 import * as cors from "cors"
 import routes from "./routes"
 import { AppDataSource } from "./data-source"
+import * as dotenv from "dotenv"
+
+dotenv.config()
 
 AppDataSource.initialize()
     .then(() => {
@@ -18,8 +21,8 @@ AppDataSource.initialize()
         //Set all routes from routes folder
         app.use("/", routes)
 
-        app.listen(3030, () => {
-            console.log("Server started on por 3030")
+        app.listen(process.env.PORT || 5000, () => {
+            console.log(`Server started`)
         })
     })
     .catch((error) => console.log(error))
