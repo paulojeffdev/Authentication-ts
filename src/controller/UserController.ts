@@ -20,7 +20,19 @@ export class UserController {
         const userRepository = AppDataSource.getRepository(User)
         let user: User
         try {
-            user = await userRepository.findOneOrFail({where: id})
+            user = await userRepository.findOneOrFail({
+                select: {
+                    id: true,
+                    username: true,
+                    password: false,
+                    role: true,
+                    createdAt: true,
+                    updatedAt: true
+                },
+                where: {
+                    id: id
+                }
+            })
         } catch (error) {
             return res.status(404).send("User not found")
         }
@@ -30,7 +42,7 @@ export class UserController {
 
     static newUser = async (req: Request, res: Response) => {
         let {username, password, role} = req.body
-
+        
         let user: User = new User()
         user.username = username
         user.password = password
@@ -61,7 +73,11 @@ export class UserController {
         const userRepository = AppDataSource.getRepository(User)
         let user: User
         try {
-            user = await userRepository.findOneOrFail({where: id})
+            user = await userRepository.findOneOrFail({
+                where: {
+                    id: id
+                }
+            })
         } catch (error) {
             return res.status(404).send("User not found")
         }
@@ -94,7 +110,11 @@ export class UserController {
         const userRepository = AppDataSource.getRepository(User)
         let user: User
         try {
-            user = await userRepository.findOneOrFail({where: id})
+            user = await userRepository.findOneOrFail({
+                where: {
+                    id: id
+                }
+            })
         } catch(error) {
             return res.status(404).send("User not found")
         }

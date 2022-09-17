@@ -41,7 +41,7 @@ class AuthController {
 
         const {oldPassword, newPassword} = req.body
         if(!(oldPassword && newPassword)) {
-            return res.status(400).send()
+            return res.status(400).send("Authentication required")
         }
 
         const userRepository = AppDataSource.getRepository(User)
